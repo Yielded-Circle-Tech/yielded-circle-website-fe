@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Performance monitoring - optional */
+@supports (font-size: clamp(1px, 1vw, 1px)) {
+  html {
+    /* Enables smooth font scaling */
+    font-size: clamp(14px, 1.3vw, 16px);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
