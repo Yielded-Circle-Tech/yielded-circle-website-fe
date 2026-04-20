@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "target": "es2020",
     "useDefineForClassFields": true,
     "lib": [
@@ -20,7 +19,6 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "noEmit": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
