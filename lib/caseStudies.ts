@@ -161,7 +161,7 @@ export const caseStudies: CaseStudy[] = [
       heading: "Built to work anywhere",
       rows: [
         { layer: "Communication layer", technology: "USSD protocol" },
-        { layer: "Backend", technology: "Node.js" },
+        { layer: "Monolithic", technology: "Ruby on rails" },
         { layer: "Database", technology: "PostgreSQL" },
         { layer: "Infrastructure", technology: "AWS" },
         {
@@ -299,7 +299,7 @@ export const caseStudies: CaseStudy[] = [
       label: "Technology used",
       heading: "Built on a managed, scalable platform architecture",
       rows: [
-        { layer: "Frontend", technology: "React, Next.js" },
+        { layer: "Frontend", technology: "Next.js" },
         { layer: "Backend", technology: "Node.js, Express" },
         { layer: "Database", technology: "PostgreSQL, Prisma" },
         {

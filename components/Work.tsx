@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface WorkItem {
+  slug: string;
   badge: string;
   badgeType: "aws" | "b2b" | "live" | "saas";
   title: string;
@@ -12,6 +13,7 @@ interface WorkItem {
 
 const workItems: WorkItem[] = [
   {
+    slug: "haba-na-haba",
     badge: "AWS-funded",
     badgeType: "aws",
     title: "Haba Na Haba",
@@ -21,6 +23,7 @@ const workItems: WorkItem[] = [
     imageAlt: "Haba Na Haba admin dashboard preview",
   },
   {
+    slug: "leddar",
     badge: "B2B marketplace",
     badgeType: "b2b",
     title: "Leddar Platform",
@@ -30,6 +33,7 @@ const workItems: WorkItem[] = [
     imageAlt: "Leddar platform dashboard preview",
   },
   {
+    slug: "bookpound",
     badge: "E-commerce",
     badgeType: "live",
     title: "BookPound",
@@ -39,6 +43,7 @@ const workItems: WorkItem[] = [
     imageAlt: "BookPound marketplace interface preview",
   },
   {
+    slug: "itan-technologies",
     badge: "SaaS",
     badgeType: "saas",
     title: "Itan Technologies",
@@ -107,7 +112,7 @@ export function Work() {
 
                   <div className="mt-5 flex items-center justify-between gap-3">
                     <Link
-                      href="/client-stories"
+                      href={`/client-stories/${item.slug}`}
                       className="inline-flex rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-4 py-2 text-sm font-semibold text-white shadow-brand transition hover:brightness-110"
                     >
                       View case study
