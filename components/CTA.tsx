@@ -65,23 +65,21 @@ export function CTA() {
   };
 
   return (
-    <section
-      className="border-t border-page-border py-14 md:py-20"
-      id="contact"
-    >
+    <section className="section-space border-t border-page-border" id="contact">
       <div className="mx-auto w-full max-w-content px-4 md:px-6">
-        <div className="rounded-2xl border border-brand/20 bg-[#1E0F06] px-5 py-10 text-center md:px-8 md:py-12">
-          <h2 className="text-3xl font-medium tracking-tight text-white md:text-4xl">
+        <div className="reveal rounded-3xl border border-brand-soft/60 bg-[linear-gradient(140deg,#f3e7ff_0%,#e9dbff_48%,#ddd0ff_100%)] px-5 py-10 text-center shadow-[0_20px_44px_rgba(75,0,130,0.16)] md:px-8 md:py-12">
+          <h2 className="text-3xl font-medium tracking-tight text-page-text md:text-4xl">
             Have an idea? Let&apos;s talk.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/70">
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-page-textMuted">
             Book a free 45-minute discovery call. No pitch, no pressure — just
             honest advice on whether and how to build it.
           </p>
 
           <form
             onSubmit={handleSubmit}
-            className="mx-auto mt-8 max-w-2xl space-y-3"
+            className="mx-auto mt-8 max-w-2xl space-y-3 reveal"
+            style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
           >
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <input
@@ -90,7 +88,7 @@ export function CTA() {
                 placeholder="Your name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full rounded-md border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:border-white/50 focus:outline-none"
+                className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none"
                 required
               />
               <input
@@ -99,7 +97,7 @@ export function CTA() {
                 placeholder="WhatsApp number"
                 value={formData.whatsapp}
                 onChange={handleChange}
-                className="w-full rounded-md border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:border-white/50 focus:outline-none"
+                className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none"
                 required
               />
             </div>
@@ -110,27 +108,27 @@ export function CTA() {
                 placeholder="Briefly describe your idea..."
                 value={formData.idea}
                 onChange={handleChange}
-                className="w-full rounded-md border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-white/50 focus:border-white/50 focus:outline-none"
+                className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none"
                 rows={3}
               />
             </div>
 
             <button
               type="submit"
-              className="w-full rounded-md bg-brand px-6 py-3 text-sm font-medium text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
+              className="w-full rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-6 py-3 text-sm font-semibold text-white shadow-brand transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
               disabled={isLoading}
             >
               {isLoading ? "Submitting..." : "Book discovery call"}
             </button>
 
             {isSubmitted && (
-              <div className="text-sm font-medium text-green-400">
+              <div className="text-sm font-medium text-brand-deep">
                 ✓ Got it — we&apos;ll reach out on WhatsApp within 24 hours.
               </div>
             )}
 
             {errorMessage && (
-              <div className="text-sm font-medium text-red-300">
+              <div className="text-sm font-medium text-red-700">
                 {errorMessage}
               </div>
             )}

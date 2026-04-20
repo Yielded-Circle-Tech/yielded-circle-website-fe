@@ -29,7 +29,7 @@ const workItems: WorkItem[] = [
   },
   {
     badge: "SaaS",
-    badgeType: "live",
+    badgeType: "saas",
     title: "Itan Technologies",
     description:
       "Product built under the Itan Technologies brand — demonstrating our ability to work as an embedded technical team for founders.",
@@ -38,16 +38,16 @@ const workItems: WorkItem[] = [
 
 export function Work() {
   const badgeClassMap: Record<WorkItem["badgeType"], string> = {
-    aws: "bg-[#FFF5E0] text-[#B87D00]",
-    b2b: "bg-[#EAF3DE] text-[#3B6D11]",
-    live: "bg-[#E6F1FB] text-[#185FA5]",
-    saas: "bg-[#E6F1FB] text-[#185FA5]",
+    aws: "bg-[#e8dcff] text-[#4b0082]",
+    b2b: "bg-[#e5d7ff] text-[#7630ff]",
+    live: "bg-[#efe4ff] text-[#7e21d4]",
+    saas: "bg-[#e2d0ff] text-[#21004b]",
   };
 
   return (
-    <section className="border-t border-page-border py-14 md:py-20" id="work">
+    <section className="section-space border-t border-page-border" id="work">
       <div className="mx-auto w-full max-w-content px-4 md:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
             Selected work
           </div>
@@ -64,10 +64,12 @@ export function Work() {
           {workItems.map((item, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-page-border bg-page-surface p-6 transition hover:-translate-y-0.5 hover:border-page-borderStrong hover:bg-page-elevated"
+              className="reveal rounded-2xl border border-brand-soft/45 bg-[linear-gradient(180deg,#ffffff_0%,#f2e8ff_100%)] p-6 shadow-[0_10px_24px_rgba(75,0,130,0.1)] transition hover:-translate-y-1 hover:border-brand-soft/80 hover:shadow-[0_18px_34px_rgba(75,0,130,0.16)]"
+              style={{ '--reveal-delay': `${idx * 100}ms` } as React.CSSProperties}
             >
+              <div className="mb-4 h-1.5 w-14 rounded-full bg-[linear-gradient(135deg,#4b0082_0%,#7630ff_100%)]" />
               <span
-                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${badgeClassMap[item.badgeType]}`}
+                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ring-white/70 ${badgeClassMap[item.badgeType]}`}
               >
                 {item.badge}
               </span>

@@ -1,7 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import "@/styles/globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yieldedcircle.tech"),
@@ -48,9 +54,9 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#0A0A0A" />
+        <meta name="theme-color" content="#fcf9ff" />
       </head>
-      <body>
+      <body className={inter.className}>
         <Navbar />
         {children}
         <Footer />

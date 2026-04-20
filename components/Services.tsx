@@ -1,5 +1,5 @@
 interface Service {
-  icon: string
+  id: string
   title: string
   description: string
   tags: string[]
@@ -7,42 +7,42 @@ interface Service {
 
 const services: Service[] = [
   {
-    icon: '🧪',
+    id: '01',
     title: 'MVP validation',
     description:
       'We scope, prototype, and test your idea with real users before a single line of production code is written.',
     tags: ['Discovery sprint', 'Prototype', 'User testing'],
   },
   {
-    icon: '🏗️',
+    id: '02',
     title: 'Full-stack development',
     description:
       'React, Node.js, PostgreSQL — scalable web apps built to last, not just to ship fast.',
     tags: ['Web apps', 'APIs', 'Databases'],
   },
   {
-    icon: '📱',
+    id: '03',
     title: 'Mobile development',
     description:
       'Cross-platform mobile apps for iOS and Android. Including USSD for low-bandwidth markets.',
     tags: ['React Native', 'USSD', 'Android / iOS'],
   },
   {
-    icon: '⚡',
+    id: '04',
     title: 'AI integration',
     description:
       'Embed AI features into your product — chatbots, automations, and intelligent workflows.',
     tags: ['LLMs', 'Automation', 'AI agents'],
   },
   {
-    icon: '🛒',
+    id: '05',
     title: 'Marketplace & e-commerce',
     description:
       'Multi-vendor platforms, B2B portals, escrow payments, and KYC — built for African markets.',
     tags: ['Paystack', 'KYC', 'Multi-vendor'],
   },
   {
-    icon: '🔧',
+    id: '06',
     title: 'Tech consulting',
     description:
       'Not sure what to build or where to start? We do technical scoping, architecture review, and CTO-as-a-service.',
@@ -52,9 +52,9 @@ const services: Service[] = [
 
 export function Services() {
   return (
-    <section className="border-t border-page-border py-14 md:py-20" id="services">
+    <section className="section-space border-t border-page-border" id="services">
       <div className="mx-auto w-full max-w-content px-4 md:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
             What we do
           </div>
@@ -71,9 +71,12 @@ export function Services() {
           {services.map((service, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-page-border bg-page-surface p-6 transition hover:-translate-y-0.5 hover:border-page-borderStrong hover:bg-page-elevated"
+              className="reveal rounded-2xl border border-brand-soft/40 bg-[linear-gradient(180deg,#ffffff_0%,#f4ebff_100%)] p-6 shadow-[0_8px_22px_rgba(75,0,130,0.08)] transition hover:-translate-y-1 hover:border-brand-soft/80 hover:shadow-[0_16px_32px_rgba(75,0,130,0.16)]"
+              style={{ '--reveal-delay': `${idx * 80}ms` } as React.CSSProperties}
             >
-              <div className="mb-4 text-3xl">{service.icon}</div>
+              <div className="mb-4 inline-flex rounded-full border border-brand-soft/50 bg-white px-3 py-1 text-xs font-semibold tracking-wider text-brand-deep">
+                {service.id}
+              </div>
               <h3 className="text-lg font-medium">{service.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-page-textMuted">
                 {service.description}
@@ -82,7 +85,7 @@ export function Services() {
                 {service.tags.map((tag, tagIdx) => (
                   <span
                     key={tagIdx}
-                    className="rounded-full border border-page-borderStrong bg-page-elevated px-3 py-1 text-xs text-page-textMuted"
+                    className="rounded-full border border-brand-soft/60 bg-[#efe6ff] px-3 py-1 text-xs font-medium text-brand-deep"
                   >
                     {tag}
                   </span>

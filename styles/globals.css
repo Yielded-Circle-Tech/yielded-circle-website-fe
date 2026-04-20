@@ -13,9 +13,45 @@
 
   body {
     @apply bg-page-bg text-page-text;
+    background-image:
+      radial-gradient(circle at 10% 6%, rgba(150, 131, 236, 0.28), transparent 34%),
+      radial-gradient(circle at 90% 0%, rgba(118, 48, 255, 0.2), transparent 30%),
+      radial-gradient(circle at 50% 100%, rgba(126, 33, 212, 0.12), transparent 42%),
+      linear-gradient(180deg, #ffffff 0%, #f8f2ff 42%, #f3e9ff 100%);
+    background-repeat: no-repeat;
   }
 
   ::selection {
     @apply bg-brand text-white;
+  }
+}
+
+@layer utilities {
+  .section-space {
+    @apply py-16 md:py-24;
+  }
+
+  .reveal {
+    @apply animate-fadeInUp;
+    animation-delay: var(--reveal-delay, 0ms);
+    animation-fill-mode: both;
+    will-change: transform, opacity;
+  }
+
+  .reveal-slow {
+    @apply animate-fadeInUp;
+    animation-delay: var(--reveal-delay, 0ms);
+    animation-duration: 950ms;
+    animation-fill-mode: both;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-slow {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 }

@@ -33,9 +33,9 @@ const steps: ProcessStep[] = [
 
 export function Process() {
   return (
-    <section className="border-t border-page-border py-14 md:py-20" id="process">
+    <section className="section-space border-t border-page-border" id="process">
       <div className="mx-auto w-full max-w-content px-4 md:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
             How we work
           </div>
@@ -51,7 +51,8 @@ export function Process() {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-page-border bg-page-surface p-5"
+              className="reveal rounded-2xl border border-brand-soft/45 bg-[linear-gradient(180deg,#ffffff_0%,#f4ebff_100%)] p-5 shadow-[0_8px_20px_rgba(75,0,130,0.1)]"
+              style={{ '--reveal-delay': `${idx * 90}ms` } as React.CSSProperties}
             >
               <div className="text-xs font-semibold uppercase tracking-wider text-brand">
                 {step.num}

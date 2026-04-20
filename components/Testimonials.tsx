@@ -31,9 +31,9 @@ const testimonials: Testimonial[] = [
 
 export function Testimonials() {
   return (
-    <section className="py-14 md:py-20">
-      <div className="mx-auto w-full max-w-content rounded-2xl border border-page-border bg-page-surface px-4 py-10 md:px-6 md:py-14">
-        <div className="mx-auto max-w-2xl text-center">
+    <section className="section-space">
+      <div className="mx-auto w-full max-w-content rounded-3xl border border-brand-soft/45 bg-[linear-gradient(180deg,#f8f2ff_0%,#efe3ff_100%)] px-4 py-10 shadow-[0_16px_40px_rgba(75,0,130,0.12)] md:px-6 md:py-14">
+        <div className="reveal mx-auto max-w-2xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
             What clients say
           </div>
@@ -46,13 +46,16 @@ export function Testimonials() {
           {testimonials.map((testimonial, idx) => (
             <div
               key={idx}
-              className="rounded-xl border border-page-border bg-page-bg p-5"
+              className="reveal rounded-2xl border border-brand-soft/45 bg-[linear-gradient(180deg,#ffffff_0%,#f7f0ff_100%)] p-5 shadow-[0_8px_20px_rgba(75,0,130,0.1)]"
+              style={
+                { "--reveal-delay": `${idx * 100}ms` } as React.CSSProperties
+              }
             >
               <p className="text-sm leading-relaxed text-page-textMuted">
                 {testimonial.quote}
               </p>
               <div className="mt-5 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-light text-xs font-semibold text-brand-dark">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#4b0082_0%,#7630ff_100%)] text-xs font-semibold text-white">
                   {testimonial.initials}
                 </div>
                 <div>
