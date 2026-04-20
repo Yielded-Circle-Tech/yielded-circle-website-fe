@@ -168,8 +168,8 @@ export default function CommunityPage() {
             <p className="mt-4 text-base leading-relaxed text-page-textMuted">
               One of the most rewarding parts of building Yielded Circle Tech
               has been watching developers we have mentored go from uncertainty
-              — "I do not think I am ready" — to confidence — "I just closed my
-              first client."
+              &mdash; &ldquo;I do not think I am ready&rdquo; &mdash; to confidence &mdash; &ldquo;I just closed my
+              first client.&rdquo;
             </p>
             <p className="mt-4 text-base leading-relaxed text-page-textMuted">
               We have coached early-career developers who now earn consistently

@@ -224,7 +224,7 @@ function TestimonialBlock({
           {quote.label}
         </div>
         <blockquote className="mt-3 text-lg font-medium leading-relaxed text-brand-deep md:text-xl">
-          "{quote.quote}"
+          &ldquo;{quote.quote}&rdquo;
         </blockquote>
         <p className="mt-4 text-sm font-semibold text-page-textMuted">
           {quote.attribution}
