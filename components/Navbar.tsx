@@ -1,10 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navItems = [
+    { label: "About Us", href: "/about-us" },
+    { label: "Client stories", href: "/client-stories" },
+    { label: "Services", href: "/services" },
+    { label: "Community", href: "/community" },
+    { label: "Contact Us", href: "/contact-us" },
+    { label: "Careers", href: "/careers" },
+    { label: "Blog", href: "/blog" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,14 +25,6 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToSection = (id: string) => {
-    setIsOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <nav
@@ -36,39 +39,17 @@ export function Navbar() {
           Yielded Circle <span className="text-brand">Tech</span>
         </div>
 
-        <div className="hidden items-center gap-8 md:flex">
-          <button
-            className="text-sm text-page-textMuted transition hover:text-page-text"
-            onClick={() => scrollToSection("services")}
-          >
-            Services
-          </button>
-          <button
-            className="text-sm text-page-textMuted transition hover:text-page-text"
-            onClick={() => scrollToSection("work")}
-          >
-            Work
-          </button>
-          <button
-            className="text-sm text-page-textMuted transition hover:text-page-text"
-            onClick={() => scrollToSection("process")}
-          >
-            Process
-          </button>
-          <button
-            className="text-sm text-page-textMuted transition hover:text-page-text"
-            onClick={() => scrollToSection("contact")}
-          >
-            Contact
-          </button>
+        <div className="hidden items-center gap-6 md:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm text-page-textMuted transition hover:text-page-text"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
-
-        <button
-          className="hidden rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-5 py-2 text-sm font-semibold text-white shadow-brand transition hover:brightness-110 md:inline-block"
-          onClick={() => scrollToSection("contact")}
-        >
-          Start a project
-        </button>
 
         <button
           className="relative inline-flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
@@ -94,36 +75,24 @@ export function Navbar() {
 
         {isOpen ? (
           <div className="absolute left-0 top-16 flex w-full flex-col gap-2 border-b border-brand-soft/35 bg-[linear-gradient(180deg,#ffffff_0%,#f4ebff_100%)] p-4 md:hidden">
-            <button
-              className="rounded-md px-3 py-2 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
-              onClick={() => scrollToSection("services")}
-            >
-              Services
-            </button>
-            <button
-              className="rounded-md px-3 py-2 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
-              onClick={() => scrollToSection("work")}
-            >
-              Work
-            </button>
-            <button
-              className="rounded-md px-3 py-2 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
-              onClick={() => scrollToSection("process")}
-            >
-              Process
-            </button>
-            <button
-              className="rounded-md px-3 py-2 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
-              onClick={() => scrollToSection("contact")}
-            >
-              Contact
-            </button>
-            <button
-              className="mt-2 rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-4 py-2 text-sm font-semibold text-white shadow-brand transition hover:brightness-110"
-              onClick={() => scrollToSection("contact")}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-md px-3 py-2 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <Link
+              href="/contact-us"
+              className="mt-2 inline-flex items-center justify-center rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-4 py-2 text-sm font-semibold text-white shadow-brand transition hover:brightness-110"
+              onClick={() => setIsOpen(false)}
             >
               Start a project
-            </button>
+            </Link>
           </div>
         ) : null}
       </div>
