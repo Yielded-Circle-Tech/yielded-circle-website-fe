@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /.next/
-Sitemap: https://yieldedcircle.tech/sitemap.xml
+Sitemap: https://yieldedcircletech.com/sitemap.xml
 
 User-agent: GPTBot
 Disallow: /
