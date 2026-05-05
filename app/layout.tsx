@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import "@/styles/globals.css";
+import "../styles/globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,13 +10,18 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yieldedcircle.tech"),
+  metadataBase: new URL("https://yieldedcircletech.com"),
   title: "Yielded Circle Tech | End-to-End Software Development",
   description:
     "We help founders validate & build software that actually works. From idea to MVP — before you spend too much money building the wrong thing. Fintech, healthcare, and edtech specialists.",
   keywords:
-    "software development, MVP validation, full-stack development, fintech, healthcare, edtech",
-  authors: [{ name: "Yielded Circle Tech", url: "https://yieldedcircle.tech" }],
+    "software development, MVP validation, full-stack development, fintech, healthcare, edtech, Nigeria, Lagos",
+  authors: [
+    { name: "Yielded Circle Tech", url: "https://yieldedcircletech.com" },
+  ],
+  alternates: {
+    canonical: "https://yieldedcircletech.com",
+  },
   robots: {
     index: true,
     follow: true,
@@ -25,7 +30,7 @@ export const metadata: Metadata = {
     title: "Yielded Circle Tech | End-to-End Software Development",
     description:
       "We help founders validate & build software that actually works.",
-    url: "https://yieldedcircle.tech",
+    url: "https://yieldedcircletech.com",
     siteName: "Yielded Circle Tech",
     images: [
       {
