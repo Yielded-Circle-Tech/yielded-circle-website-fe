@@ -99,11 +99,11 @@ export default function ContactUsPage() {
                 </div>
                 <a
                   className="mt-1 block text-sm font-medium text-page-text hover:text-brand"
-                  href="https://wa.me/2348000000000"
+                  href="https://wa.me/2349012800055"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  +234 800 000 0000
+                  +234 90 128 000 55
                 </a>
               </div>
 
