@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
+
+export const runtime = "nodejs";
 
 type LeadPayload = {
   name?: string;
@@ -17,15 +19,25 @@ const escapeHtml = (value: string) =>
 
 export async function POST(request: NextRequest) {
   try {
-    const resendApiKey = process.env.RESEND_API_KEY;
+    const zohoSmtpHost = process.env.ZOHO_SMTP_HOST;
+    const zohoSmtpPort = process.env.ZOHO_SMTP_PORT;
+    const zohoSmtpUser = process.env.ZOHO_SMTP_USER;
+    const zohoSmtpPass = process.env.ZOHO_SMTP_PASS;
     const leadsToEmail = process.env.LEADS_TO_EMAIL;
     const leadsFromEmail = process.env.LEADS_FROM_EMAIL;
 
-    if (!resendApiKey || !leadsToEmail || !leadsFromEmail) {
+    if (
+      !zohoSmtpHost ||
+      !zohoSmtpPort ||
+      !zohoSmtpUser ||
+      !zohoSmtpPass ||
+      !leadsToEmail ||
+      !leadsFromEmail
+    ) {
       return NextResponse.json(
         {
           error:
-            "Lead notifications are not configured yet. Please set server environment variables.",
+            "Lead notifications are not configured yet. Please set Zoho SMTP server environment variables.",
         },
         { status: 500 },
       );
@@ -43,11 +55,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const resend = new Resend(resendApiKey);
+    const transporter = nodemailer.createTransport({
+      host: zohoSmtpHost,
+      port: Number(zohoSmtpPort),
+      secure: Number(zohoSmtpPort) === 465,
+      auth: {
+        user: zohoSmtpUser,
+        pass: zohoSmtpPass,
+      },
+    });
 
     const submittedAt = new Date().toISOString();
 
-    await resend.emails.send({
+    await transporter.sendMail({
       from: leadsFromEmail,
       to: leadsToEmail,
       subject: `New discovery call request from ${name}`,
