@@ -115,7 +115,7 @@ export default function ContactUsPage() {
                   className="mt-1 block text-sm font-medium text-page-text hover:text-brand"
                   href="mailto:hello@yieldedcircle.tech"
                 >
-                  hello@yieldedcircle.tech
+                  hello@yieldedcircletech.com
                 </a>
               </div>
 
