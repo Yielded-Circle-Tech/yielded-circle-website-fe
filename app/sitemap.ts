@@ -1,6 +1,16 @@
 import { MetadataRoute } from 'next'
+import { getPostSlugs } from '@/sanity/lib/queries'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getPostSlugs()
+
+  const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `https://yieldedcircletech.com/blog/${post.slug}`,
+    lastModified: new Date(post._updatedAt),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
   return [
     {
       url: 'https://yieldedcircletech.com',
@@ -73,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
-    }
+    },
+    ...postEntries
   ]
 }

@@ -96,6 +96,36 @@ A modern, high-converting Next.js website for Yielded Circle Tech - a software d
 - `npm run lint` - Run ESLint
 - `npm run type-check` - Check TypeScript types
 
+## ✍️ Blog (Sanity CMS)
+
+The blog is backed by [Sanity](https://sanity.io). The editing Studio is embedded in
+this app and requires a Sanity login.
+
+| Path | Purpose |
+|---|---|
+| `/studio` | Write and publish posts |
+| `/blog` | Listing, with featured post, category filter and pagination |
+| `/blog/[slug]` | Article page |
+
+```
+sanity/
+├── env.ts              # Env var validation
+├── schemas/            # post, author, category, blockContent
+└── lib/
+    ├── client.ts       # Sanity client
+    ├── image.ts        # Image URL builder
+    ├── queries.ts      # GROQ queries + typed fetchers
+    └── types.ts        # TypeScript types for query results
+components/blog/        # Cards, filter, pagination, portable text renderer
+app/(site)/             # Route group: all public pages, wrapped in Navbar/Footer
+app/studio/             # Sanity Studio, outside the (site) chrome
+```
+
+Publishing a post revalidates the live site within seconds via a webhook, or within
+60 seconds without one. Required environment variables and the one-time Sanity
+configuration (CORS origins and the webhook) are documented in
+[DEPLOYMENT.md](./DEPLOYMENT.md).
+
 ## 🎨 Styling & Theming
 
 ### Dark Theme Colors

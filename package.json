@@ -11,11 +11,17 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.4",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^3.99.0",
     "framer-motion": "^10.16.0",
     "next": "^14.0.0",
+    "next-sanity": "^9.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "resend": "^4.8.0"
+    "resend": "^4.8.0",
+    "sanity": "^3.99.0",
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

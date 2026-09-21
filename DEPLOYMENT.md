@@ -62,6 +62,58 @@ npm start
 
 **That's it!** Vercel auto-deploys on every push to main branch.
 
+## Environment Variables
+
+`.env.example` is gitignored in this repo, so the full list lives here. All of these
+must exist locally in `.env.local` and in the hosting provider before deploying.
+
+| Variable | Required | Notes |
+|---|---|---|
+| `RESEND_API_KEY` | Yes | Lead form email delivery |
+| `LEADS_TO_EMAIL` | Yes | Where lead notifications are sent |
+| `LEADS_FROM_EMAIL` | Yes | Verified Resend sender address |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Yes | `uro99o5y` — public identifier, safe in the client bundle |
+| `NEXT_PUBLIC_SANITY_DATASET` | Yes | `production` |
+| `NEXT_PUBLIC_SANITY_API_VERSION` | No | Defaults to `2024-10-01` |
+| `SANITY_REVALIDATE_SECRET` | Yes | Server-only shared secret for the publish webhook |
+
+The build fails loudly if a required Sanity variable is missing.
+
+## Blog / Sanity Setup
+
+The blog is powered by Sanity. The Studio is embedded at `/studio` and requires a
+Sanity login — it is not public. Three things must be configured in
+[sanity.io/manage](https://sanity.io/manage) for project `uro99o5y`:
+
+### 1. CORS origins
+API → CORS origins → Add, **with credentials allowed**:
+- `http://localhost:3001`
+- `https://yieldedcircletech.com`
+
+Without these the Studio loads but cannot read or write.
+
+### 2. Environment variables
+Add the four Sanity variables above to the hosting provider. Generate the secret with
+`openssl rand -hex 24` and use the same value in both places.
+
+### 3. Publish webhook
+API → Webhooks → Create webhook:
+
+| Setting | Value |
+|---|---|
+| URL | `https://yieldedcircletech.com/api/revalidate` |
+| Dataset | `production` |
+| Trigger on | Create, Update, Delete |
+| Filter | `_type in ["post","author","category"]` |
+| HTTP method | `POST` |
+| HTTP header | `x-revalidate-secret: <your SANITY_REVALIDATE_SECRET>` |
+
+Published edits then appear within seconds. Without the webhook, pages still refresh
+on their own within 60 seconds.
+
+To deploy a standalone Studio at `*.sanity.studio` as well, run `npx sanity deploy` —
+it uses the same `sanity.config.ts`.
+
 ## Alternative: Netlify Deployment
 
 ### Step 1: Build Configuration
