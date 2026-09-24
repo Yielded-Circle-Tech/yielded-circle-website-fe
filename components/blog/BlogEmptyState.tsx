@@ -27,7 +27,7 @@ export function BlogEmptyState({ filtered = false }: Props) {
           </Link>
         ) : (
           <a
-            href="mailto:hello@yieldedcircle.tech?subject=Blog%20Update%20Subscription"
+            href="mailto:hello@yieldedcircletech.com?subject=Blog%20Update%20Subscription"
             className="inline-flex rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-6 py-3 text-sm font-semibold text-white shadow-brand transition hover:brightness-110"
           >
             Get updates

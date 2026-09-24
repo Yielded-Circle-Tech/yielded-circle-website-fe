@@ -196,13 +196,13 @@ export default function CommunityPage() {
 
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="mailto:hello@yieldedcircle.tech?subject=Apply%20to%20join%20as%20a%20developer"
+              href="mailto:hello@yieldedcircletech.com?subject=Apply%20to%20join%20as%20a%20developer"
               className="inline-flex rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-6 py-3 text-sm font-semibold text-white shadow-brand transition hover:brightness-110"
             >
               Apply to join as a developer
             </a>
             <a
-              href="mailto:hello@yieldedcircle.tech?subject=Join%20as%20a%20founder"
+              href="mailto:hello@yieldedcircletech.com?subject=Join%20as%20a%20founder"
               className="inline-flex rounded-md border border-brand-deep/45 bg-white px-6 py-3 text-sm font-semibold text-brand-deep transition hover:bg-brand-deep hover:text-white"
             >
               Join as a founder

@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { isValidEmail } from "@/lib/utils";
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
     name: "",
+    email: "",
     whatsapp: "",
     idea: "",
   });
@@ -23,9 +25,14 @@ export default function ContactUsPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { name, whatsapp } = formData;
-    if (!name.trim() || !whatsapp.trim()) {
-      alert("Please enter your name and WhatsApp number.");
+    const { name, email, whatsapp } = formData;
+    if (!name.trim() || !email.trim() || !whatsapp.trim()) {
+      setErrorMessage("Please enter your name, email, and WhatsApp number.");
+      return;
+    }
+
+    if (!isValidEmail(email.trim())) {
+      setErrorMessage("Please enter a valid email address.");
       return;
     }
 
@@ -47,7 +54,7 @@ export default function ContactUsPage() {
       }
 
       setIsSubmitted(true);
-      setFormData({ name: "", whatsapp: "", idea: "" });
+      setFormData({ name: "", email: "", whatsapp: "", idea: "" });
 
       setTimeout(() => {
         setIsSubmitted(false);
@@ -113,7 +120,7 @@ export default function ContactUsPage() {
                 </div>
                 <a
                   className="mt-1 block text-sm font-medium text-page-text hover:text-brand"
-                  href="mailto:hello@yieldedcircle.tech"
+                  href="mailto:hello@yieldedcircletech.com"
                 >
                   hello@yieldedcircletech.com
                 </a>
@@ -163,6 +170,17 @@ export default function ContactUsPage() {
                   placeholder="Your name"
                   value={formData.name}
                   onChange={handleChange}
+                  autoComplete="name"
+                  className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  autoComplete="email"
                   className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none"
                   required
                 />
@@ -172,7 +190,8 @@ export default function ContactUsPage() {
                   placeholder="WhatsApp number"
                   value={formData.whatsapp}
                   onChange={handleChange}
-                  className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none"
+                  autoComplete="tel"
+                  className="w-full rounded-md border border-brand-soft/45 bg-white px-4 py-3 text-sm text-page-text placeholder:text-page-textMuted focus:border-brand-accent focus:outline-none md:col-span-2"
                   required
                 />
               </div>

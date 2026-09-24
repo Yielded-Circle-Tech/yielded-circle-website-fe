@@ -18,7 +18,7 @@ export default function CareersPage() {
 
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
-              href="mailto:hello@yieldedcircle.tech?subject=Career%20Interest%20at%20Yielded%20Circle%20Tech"
+              href="mailto:hello@yieldedcircletech.com?subject=Career%20Interest%20at%20Yielded%20Circle%20Tech"
               className="inline-flex rounded-md bg-[linear-gradient(135deg,#4b0082_0%,#7e21d4_60%,#7630ff_100%)] px-6 py-3 text-sm font-semibold text-white shadow-brand transition hover:brightness-110"
             >
               Express interest

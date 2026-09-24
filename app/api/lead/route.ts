@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { isValidEmail } from "@/lib/utils";
 
 type LeadPayload = {
   name?: string;
+  email?: string;
   whatsapp?: string;
   idea?: string;
 };
@@ -33,12 +35,20 @@ export async function POST(request: NextRequest) {
 
     const body = (await request.json()) as LeadPayload;
     const name = (body.name || "").trim();
+    const email = (body.email || "").trim();
     const whatsapp = (body.whatsapp || "").trim();
     const idea = (body.idea || "").trim();
 
-    if (!name || !whatsapp) {
+    if (!name || !email || !whatsapp) {
       return NextResponse.json(
-        { error: "Name and WhatsApp number are required." },
+        { error: "Name, email, and WhatsApp number are required." },
+        { status: 400 },
+      );
+    }
+
+    if (!isValidEmail(email)) {
+      return NextResponse.json(
+        { error: "Please enter a valid email address." },
         { status: 400 },
       );
     }
@@ -50,10 +60,12 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: leadsFromEmail,
       to: leadsToEmail,
+      replyTo: email,
       subject: `New discovery call request from ${name}`,
       html: `
         <h2>New discovery call lead</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>WhatsApp:</strong> ${escapeHtml(whatsapp)}</p>
         <p><strong>Idea:</strong> ${escapeHtml(idea || "Not provided")}</p>
         <p><strong>Submitted at:</strong> ${escapeHtml(submittedAt)}</p>
@@ -61,6 +73,7 @@ export async function POST(request: NextRequest) {
       text: [
         "New discovery call lead",
         `Name: ${name}`,
+        `Email: ${email}`,
         `WhatsApp: ${whatsapp}`,
         `Idea: ${idea || "Not provided"}`,
         `Submitted at: ${submittedAt}`,
