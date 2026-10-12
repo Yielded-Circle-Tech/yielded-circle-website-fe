@@ -29,7 +29,7 @@ export function Footer() {
             WhatsApp
           </a>
           <a
-            href="mailto:hello@yieldedcircle.tech"
+            href="mailto:hello@yieldedcircletech.com"
             className="transition hover:text-brand-deep"
           >
             Email
