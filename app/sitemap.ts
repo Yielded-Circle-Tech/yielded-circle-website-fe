@@ -61,6 +61,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
       },
     {
+      url: 'https://yieldedcircletech.com/resources/ai-prompts',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      },
+    {
       url: 'https://yieldedcircletech.com/client-stories/haba-na-haba',
       lastModified: new Date(),
       changeFrequency: 'monthly',
