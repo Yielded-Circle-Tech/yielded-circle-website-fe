@@ -82,9 +82,11 @@ export function PromptCard({ prompt, index }: Props) {
         {copied ? "Copied ✓" : "Copy prompt"}
       </button>
 
-      <p className="mt-4 border-l-[3px] border-brand pl-3 text-[14.5px] leading-relaxed text-page-textMuted">
-        <b className="text-page-text">Tip:</b> {prompt.tip}
-      </p>
+      {prompt.tip ? (
+        <p className="mt-4 border-l-[3px] border-brand pl-3 text-[14.5px] leading-relaxed text-page-textMuted">
+          <b className="text-page-text">Tip:</b> {prompt.tip}
+        </p>
+      ) : null}
     </section>
   );
 }

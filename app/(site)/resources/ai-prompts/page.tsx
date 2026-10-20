@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PackNote } from "@/components/resources/PackNote";
 import { PromptCard } from "@/components/resources/PromptCard";
 import { PromptSignupForm } from "@/components/resources/PromptSignupForm";
-import { aiPrompts } from "@/lib/aiPrompts";
+import { promptPacks } from "@/lib/aiPrompts";
 
 const COMMUNITY_LINK = "https://chat.whatsapp.com/DRFl1tSTMnx2qzJXyibKxu";
 
 export const metadata: Metadata = {
   title: "Free AI Prompts for Nigerian Business Owners | Yielded Circle Tech",
   description:
-    "Free copy-and-paste ChatGPT prompts for Nigerian business owners. Turn trends into marketing ideas, create ready-to-post content and get more customers.",
+    "Free copy-and-paste ChatGPT prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice and get more customers.",
   alternates: {
     canonical: "https://yieldedcircletech.com/resources/ai-prompts",
   },
@@ -63,51 +64,56 @@ export default function AiPromptsPage() {
               </span>
             ))}
           </div>
+
+          <nav
+            aria-label="Prompt packs"
+            className="mt-7 flex flex-wrap gap-2.5 border-t border-white/15 pt-6"
+          >
+            {promptPacks.map((pack) => (
+              <a
+                key={pack.id}
+                href={`#${pack.id}`}
+                className="rounded-full bg-white/95 px-4 py-2 text-sm font-bold text-brand-deep transition hover:bg-brand-light"
+              >
+                {pack.title}
+              </a>
+            ))}
+          </nav>
         </div>
       </header>
 
       <div className="mx-auto w-full max-w-3xl px-4 py-12 md:px-6">
-        <div className="space-y-7">
-          {aiPrompts.map((prompt, idx) => (
-            <PromptCard key={prompt.id} prompt={prompt} index={idx} />
-          ))}
-        </div>
+        {promptPacks.map((pack) => (
+          <section key={pack.id} id={pack.id} className="scroll-mt-24 pb-4">
+            <div className="reveal mb-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+                {pack.eyebrow}
+              </p>
+              <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-page-text md:text-4xl">
+                {pack.title}
+              </h2>
+              {pack.intro ? (
+                <p className="mt-3 text-base leading-relaxed text-page-textMuted">
+                  {pack.intro}
+                </p>
+              ) : null}
+            </div>
 
-        <section className="reveal mt-7 rounded-2xl border border-brand-soft/45 bg-white p-6 shadow-[0_10px_24px_rgba(75,0,130,0.1)] md:p-7">
-          <h2 className="text-2xl font-semibold tracking-tight text-page-text">
-            How to get real results
-          </h2>
+            <div className="space-y-7">
+              {pack.prompts.map((prompt, idx) => (
+                <PromptCard key={prompt.id} prompt={prompt} index={idx} />
+              ))}
+            </div>
 
-          <ol className="mt-4 list-decimal space-y-2.5 pl-5 text-base leading-relaxed text-page-textMuted">
-            <li>
-              <b className="text-page-text">Give ChatGPT context.</b> What you
-              sell, who buys it, where you are and what makes you different.
-            </li>
-            <li>
-              <b className="text-page-text">Pick one idea.</b> Don&apos;t try
-              them all. Choose the strongest and post it this week.
-            </li>
-            <li>
-              <b className="text-page-text">Make it easy to buy.</b> Show what
-              you sell, the price and how to order.
-            </li>
-            <li>
-              <b className="text-page-text">Watch the right numbers.</b>{" "}
-              Enquiries, WhatsApp chats and sales matter more than views and
-              likes.
-            </li>
-          </ol>
-
-          <p className="mt-3 text-sm leading-relaxed text-page-textMuted">
-            AI helps you think and create faster, but it can&apos;t guarantee
-            sales. Your offer, your customers and your follow-up still do the
-            heavy lifting.
-          </p>
-        </section>
+            <div className="mt-7">
+              <PackNote note={pack.note} />
+            </div>
+          </section>
+        ))}
 
         <section
           id="join"
-          className="reveal mt-7 rounded-3xl bg-[linear-gradient(150deg,#4b0082_0%,#7630ff_100%)] px-6 py-9 text-white shadow-[0_20px_44px_rgba(75,0,130,0.22)] md:px-7 md:py-10"
+          className="reveal mt-10 rounded-3xl bg-[linear-gradient(150deg,#4b0082_0%,#7630ff_100%)] px-6 py-9 text-white shadow-[0_20px_44px_rgba(75,0,130,0.22)] md:px-7 md:py-10"
         >
           <h2 className="text-balance text-2xl font-black leading-tight md:text-[28px]">
             Get new prompts every week
