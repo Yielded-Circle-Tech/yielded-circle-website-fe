@@ -128,7 +128,7 @@ export const promptPacks: PromptPack[] = [
           `. I've labelled each one by platform.\n\nStudy how I write my posts. Then give me a short "My Voice Guide":\n- how long my sentences and posts are\n- how I start a post and how I end it\n- words and phrases I use a lot\n- how I talk about my products and prices\n- the emojis and hashtags I use, and how many\n- any Pidgin, Yoruba, Igbo or Hausa words I use\n- things I never say\n\nIf I write differently on different platforms, add one short line for each platform.\n\nDon't guess. If something isn't in my posts, ask me.\nKeep the guide under 200 words so I can paste it into any chat.\n\n`,
           { fill: "[paste your posts or upload screenshots]" },
         ],
-        tip: "No posts? Record yourself talking about your business for 2 minutes and paste the transcript.",
+        tip: "If you have no posts, record yourself talking about your business for 2 minutes, upload on youtube and paste the transcript.",
       },
       {
         id: "prompt-5",
