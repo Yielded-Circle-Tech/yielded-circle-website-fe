@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = `${SITE_URL}/blog/${post.slug}`;
   const ogImage = post.coverImage
     ? imageUrl(post.coverImage, 1200, 630)
-    : "/og-image.png";
+    : "/og-image.jpg";
 
   return {
     title: `${title} | Yielded Circle Tech`,

@@ -32,12 +32,21 @@ export const metadata: Metadata = {
     siteName: "Yielded Circle Tech",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
+        type: "image/jpeg",
+        alt: "Yielded Circle Tech: we help founders validate and build software that works",
       },
     ],
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yielded Circle Tech | End-to-End Software Development",
+    description:
+      "We help founders validate & build software that actually works.",
+    images: ["/og-image.jpg"],
   },
 };
 

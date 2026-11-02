@@ -21,7 +21,22 @@ export const metadata: Metadata = {
     url: "https://yieldedcircletech.com/resources/ai-prompts",
     siteName: "Yielded Circle Tech",
     type: "website",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [
+      {
+        url: "https://yieldedcircletech.com/og-ai-prompts.jpg",
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
+        alt: "Free AI Prompts for Nigerian Business Owners",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free AI Prompts for Nigerian Business Owners",
+    description:
+      "Copy, paste and grow your business with AI. Free prompts by Ayo, Founder of Yielded Circle Tech.",
+    images: ["https://yieldedcircletech.com/og-ai-prompts.jpg"],
   },
 };
 
