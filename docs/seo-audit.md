@@ -87,9 +87,39 @@ signal that competitors have. **Medium/Low** = polish.
 | 7.7 | `framer-motion` is a dependency but never imported. It does not ship to users (tree-shaken), but adds install time and noise. | Low |
 | 7.8 | Manual `<head>` in the root layout duplicates `charset` and hardcodes the `theme-color`; should use the Metadata/Viewport API. | Low |
 
-## Fix plan
+## Status after this branch
 
-Everything above marked Critical/High/Medium is fixed on this branch except items
-that need information only the business has (real social URLs, phone number,
-logo artwork, AI crawler policy). Those are listed under "Manual actions" in the
-final summary and in `docs/blog-post-template.md`.
+| Area | Items | Status |
+|---|---|---|
+| Metadata & canonicals | 1.1–1.8 | Fixed: every route uses `pageMetadata()` (`lib/seo.ts`); root canonical removed; contact page metadata via `contact-us/layout.tsx`; case studies have `generateMetadata`; blog pagination/category views self-canonicalise; unknown categories are `noindex`. |
+| Crawling | 2.1–2.7 | Fixed: `app/sitemap.ts` (hourly, resilient), `app/robots.ts` (blocks `/studio`, blocks previews), `/rss.xml`, branded 404, favicon/icons/manifest, `NEXT_PUBLIC_SITE_URL`. `public/sitemap.txt` removed. |
+| Structured data | 3.1–3.4 | Fixed: Organization + ProfessionalService/LocalBusiness (Lagos) + WebSite on every page; full BlogPosting; BreadcrumbList on every page. |
+| Content structure | 4.2, 4.4, 4.5, 4.7 | Fixed. 4.6 (placeholder social links) needs real URLs — manual. |
+| Slugs | 5.1–5.2 | Fixed in Sanity schema (custom slugifier + validation + length warnings). |
+| Mobile | 6.2–6.4 | Fixed. |
+| Performance | 7.1–7.4, 7.7–7.8 | Fixed. Also found and fixed: the `next-sanity` barrel import shipped ~60 kB (gzip) of Sanity client code to blog visitors; blog First Load JS 162 kB → 102 kB. |
+
+Verified by a production build and by rendering every route at 360px in
+headless Chromium (unique title/description/canonical, one H1, no images
+without alt, no horizontal overflow, JSON-LD present, 404 status on missing
+pages and posts).
+
+## Manual actions (need business input)
+
+1. Set real profile URLs in `lib/site.ts` → `sameAs` (LinkedIn, Instagram,
+   TikTok, YouTube, X) and fix the placeholder footer links in
+   `components/Footer.tsx` (`https://linkedin.com`, `wa.me/2348000000000`).
+2. Add a phone number to `lib/site.ts` → `telephone` (and a street address in
+   `address` if you want to appear in Google Maps / local pack).
+3. Replace the generated "YC" monogram (`app/icon.svg`, `app/apple-icon.png`,
+   `app/favicon.ico`, `public/logo.png`) with the real logo, keeping the sizes.
+4. Verify the domain in Google Search Console and Bing Webmaster Tools, set
+   `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` / `NEXT_PUBLIC_BING_SITE_VERIFICATION`
+   in Vercel, then submit `https://yieldedcircletech.com/sitemap.xml`.
+5. Create a Google Business Profile for the Lagos office (the biggest local-SEO
+   lever; schema alone does not get you into the map pack).
+6. Decide on AI crawlers: `GPTBot`, `CCBot`, `anthropic-ai`, `Claude-Web` are
+   still blocked (as before). Unblock them in `app/robots.ts` if you want the
+   brand to show up in AI assistants' answers.
+7. Configure the Sanity publish webhook (`/api/revalidate`, see
+   `DEPLOYMENT.md`) so new posts reach the sitemap and RSS immediately.
