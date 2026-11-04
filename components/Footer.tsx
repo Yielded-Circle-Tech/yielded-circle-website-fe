@@ -11,12 +11,12 @@ export function Footer() {
           © {currentYear} Yielded Circle Tech · Lagos, Nigeria
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 text-xs text-page-textMuted md:justify-end md:text-sm">
+        <div className="flex flex-wrap justify-center gap-x-2 text-sm text-page-textMuted md:justify-end">
           <a
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition hover:text-brand-deep"
+            className="inline-flex min-h-[44px] items-center px-2 transition hover:text-brand-deep"
           >
             LinkedIn
           </a>
@@ -24,13 +24,13 @@ export function Footer() {
             href="https://wa.me/2348000000000"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition hover:text-brand-deep"
+            className="inline-flex min-h-[44px] items-center px-2 transition hover:text-brand-deep"
           >
             WhatsApp
           </a>
           <a
             href="mailto:hello@yieldedcircletech.com"
-            className="transition hover:text-brand-deep"
+            className="inline-flex min-h-[44px] items-center px-2 transition hover:text-brand-deep"
           >
             Email
           </a>

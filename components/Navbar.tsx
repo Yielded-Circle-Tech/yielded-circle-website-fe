@@ -22,7 +22,8 @@ export function Navbar() {
       setScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -35,9 +36,13 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 w-full max-w-content items-center justify-between px-4 md:px-6">
-        <div className="text-sm font-semibold tracking-tight md:text-base">
+        <Link
+          href="/"
+          className="py-2 text-sm font-semibold tracking-tight md:text-base"
+          aria-label="Yielded Circle Tech home"
+        >
           Yielded Circle <span className="text-brand">Tech</span>
-        </div>
+        </Link>
 
         <div className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
@@ -54,7 +59,9 @@ export function Navbar() {
         <button
           className="relative inline-flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <span
             className={`h-0.5 w-6 bg-page-text transition ${
@@ -74,12 +81,15 @@ export function Navbar() {
         </button>
 
         {isOpen ? (
-          <div className="absolute left-0 top-16 flex w-full flex-col gap-2 border-b border-brand-soft/35 bg-[linear-gradient(180deg,#ffffff_0%,#f4ebff_100%)] p-4 md:hidden">
+          <div
+            id="mobile-menu"
+            className="absolute left-0 top-16 flex w-full flex-col gap-2 border-b border-brand-soft/35 bg-[linear-gradient(180deg,#ffffff_0%,#f4ebff_100%)] p-4 md:hidden"
+          >
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
+                className="rounded-md px-3 py-3 text-left text-sm text-page-textMuted transition hover:bg-page-surface hover:text-page-text"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
