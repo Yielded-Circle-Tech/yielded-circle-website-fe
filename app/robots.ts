@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl, SITE_URL } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site";
 
 /**
  * Preview deployments (VERCEL_ENV=preview) are blocked entirely so they never
@@ -26,6 +26,5 @@ export default function robots(): MetadataRoute.Robots {
       ...AI_TRAINING_BOTS.map((userAgent) => ({ userAgent, disallow: "/" })),
     ],
     sitemap: absoluteUrl("/sitemap.xml"),
-    host: SITE_URL,
   };
 }

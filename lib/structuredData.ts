@@ -116,6 +116,17 @@ export type BlogPostingInput = {
   wordCount?: number;
 };
 
+/** Inline publisher: Google's Article checks want name + logo on the node itself. */
+function publisherRef(): Thing {
+  return {
+    "@type": "Organization",
+    "@id": ORG_ID,
+    name: site.name,
+    url: SITE_URL,
+    logo: { "@type": "ImageObject", url: absoluteUrl(site.logo) },
+  };
+}
+
 export function blogPostingSchema(post: BlogPostingInput): Thing {
   const url = absoluteUrl(post.path);
   return compact({
@@ -131,8 +142,8 @@ export function blogPostingSchema(post: BlogPostingInput): Thing {
     inLanguage: site.language,
     author: post.authorName
       ? { "@type": "Person", name: post.authorName }
-      : { "@id": ORG_ID },
-    publisher: { "@id": ORG_ID },
+      : publisherRef(),
+    publisher: publisherRef(),
     isPartOf: { "@id": WEBSITE_ID },
     articleSection: post.categories?.[0],
     keywords: post.categories?.join(", "),

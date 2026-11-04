@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { absoluteUrl, site } from "@/lib/site";
 
+export const RSS_ALTERNATE = {
+  "application/rss+xml": [{ url: "/rss.xml", title: `${site.name} blog` }],
+};
+
 type PageMetaInput = {
   /** Page title without the brand suffix; the root layout template adds it. */
   title: string;
@@ -41,7 +45,9 @@ export function pageMetadata({
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
-    alternates: { canonical: url },
+    // Page-level `alternates` replaces the root one (Next merges metadata
+    // shallowly), so the RSS link is repeated here to keep it on every page.
+    alternates: { canonical: url, types: RSS_ALTERNATE },
     openGraph: {
       title: socialTitle,
       description,

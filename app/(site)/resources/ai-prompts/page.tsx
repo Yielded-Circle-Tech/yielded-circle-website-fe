@@ -14,7 +14,7 @@ const COMMUNITY_LINK = "https://chat.whatsapp.com/DRFl1tSTMnx2qzJXyibKxu";
 export const metadata: Metadata = pageMetadata({
   title: "Free AI Prompts for Nigerian Business Owners",
   description:
-    "Free copy-and-paste AI prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice, edit short videos and get more customers.",
+    "Free copy-and-paste AI prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice, edit short videos, win customers.",
   path: "/resources/ai-prompts",
   image: {
     url: "/og-ai-prompts.jpg",

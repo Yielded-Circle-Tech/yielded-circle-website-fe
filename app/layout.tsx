@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { RSS_ALTERNATE } from "@/lib/seo";
 import { site, SITE_URL } from "@/lib/site";
 import "../styles/globals.css";
 
@@ -37,13 +38,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  alternates: {
-    types: {
-      "application/rss+xml": [
-        { url: "/rss.xml", title: `${site.name} blog` },
-      ],
-    },
-  },
+  alternates: { types: RSS_ALTERNATE },
   openGraph: {
     siteName: site.name,
     locale: site.locale,
