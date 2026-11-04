@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Community: Growing Africa's Next Builders",
+  description: "Yielded Circle Tech is a community of developers, founders and builders in Nigeria and across Africa, working together on real, high-impact products.",
+  path: "/community",
+});
+
 export default function CommunityPage() {
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
+      <Breadcrumbs items={[{ name: "Community", path: "/community" }]} />
       <section className="mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal mx-auto max-w-4xl text-center">
           <div className="inline-flex rounded-full border border-brand-soft/60 bg-[linear-gradient(90deg,#f6eeff_0%,#efe3ff_100%)] px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep">

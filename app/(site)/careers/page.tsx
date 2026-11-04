@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import Link from "next/link";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Careers",
+  description: "Want to build real products for African founders and NGOs? See how to join the Yielded Circle Tech team in Lagos and register your interest in future roles.",
+  path: "/careers",
+});
 
 export default function CareersPage() {
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
+      <Breadcrumbs items={[{ name: "Careers", path: "/careers" }]} />
       <section className="section-space mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal mx-auto max-w-3xl rounded-3xl border border-brand-soft/60 bg-[linear-gradient(140deg,#f3e7ff_0%,#e9dbff_48%,#ddd0ff_100%)] px-6 py-12 text-center shadow-[0_20px_44px_rgba(75,0,130,0.16)] md:px-10 md:py-14">
           <div className="inline-flex rounded-full border border-brand-soft/60 bg-white/70 px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep">

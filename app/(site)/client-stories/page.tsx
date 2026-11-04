@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import Link from "next/link";
 import { caseStudies } from "@/lib/caseStudies";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Client Stories: Software Case Studies From Africa",
+  description: "Case studies from real products we built: a USSD app for food banks, a B2B leather marketplace, a multi-vendor bookstore and an ebook MVP shipped in 3 months.",
+  path: "/client-stories",
+});
 
 export default function ClientStoriesPage() {
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
+      <Breadcrumbs items={[{ name: "Client stories", path: "/client-stories" }]} />
       <section className="section-space mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal mx-auto max-w-3xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">

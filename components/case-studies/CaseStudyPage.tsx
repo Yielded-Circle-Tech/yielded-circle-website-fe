@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 type Props = {
@@ -9,6 +10,17 @@ export function CaseStudyPage({ study }: Props) {
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
       <section className="mx-auto w-full max-w-content px-4 md:px-6">
+        <Breadcrumbs
+          visible
+          className="mx-auto mb-6 max-w-5xl"
+          items={[
+            { name: "Client stories", path: "/client-stories" },
+            {
+              name: study.title.split(" — ")[0],
+              path: `/client-stories/${study.slug}`,
+            },
+          ]}
+        />
         <div className="reveal mx-auto max-w-5xl text-center">
           <div className="inline-flex rounded-full border border-brand-soft/60 bg-[linear-gradient(90deg,#f6eeff_0%,#efe3ff_100%)] px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep">
             {study.badge}
@@ -185,7 +197,7 @@ function TechStackBlock({ section }: { section: CaseStudy["techStack"] }) {
         </div>
 
         <div className="overflow-x-auto px-6 py-5 md:px-8">
-          <table className="w-full min-w-[360px] border-collapse text-left text-sm">
+          <table className="w-full min-w-[280px] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-brand-soft/45 text-page-text">
                 <th className="py-2 pr-4 font-semibold">Layer</th>

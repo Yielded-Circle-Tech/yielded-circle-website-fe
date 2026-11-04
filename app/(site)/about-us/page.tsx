@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import Link from "next/link";
+
+export const metadata: Metadata = pageMetadata({
+  title: "About Us: A Lagos Software Team Building for Africa",
+  description: "Meet Yielded Circle Tech, a Lagos-based team helping African founders and NGOs validate ideas and ship MVPs, custom platforms and marketplace apps that work.",
+  path: "/about-us",
+});
 
 const whyChooseUs = [
   "We validate before we build — saving you from expensive mistakes",
@@ -19,6 +28,7 @@ const stats = [
 export default function AboutUsPage() {
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
+      <Breadcrumbs items={[{ name: "About Us", path: "/about-us" }]} />
       <section className="mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal mx-auto max-w-4xl text-center">
           <div className="inline-flex rounded-full border border-brand-soft/60 bg-[linear-gradient(90deg,#f6eeff_0%,#efe3ff_100%)] px-4 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-deep">

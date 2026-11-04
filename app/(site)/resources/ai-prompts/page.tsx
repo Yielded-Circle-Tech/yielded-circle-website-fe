@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { pageMetadata } from "@/lib/seo";
 import { PackNote } from "@/components/resources/PackNote";
 import { PromptCard } from "@/components/resources/PromptCard";
 import { PromptSignupForm } from "@/components/resources/PromptSignupForm";
@@ -9,38 +11,16 @@ import { videoGuide } from "@/lib/videoEditGuide";
 
 const COMMUNITY_LINK = "https://chat.whatsapp.com/DRFl1tSTMnx2qzJXyibKxu";
 
-export const metadata: Metadata = {
-  title: "Free AI Prompts for Nigerian Business Owners | Yielded Circle Tech",
+export const metadata: Metadata = pageMetadata({
+  title: "Free AI Prompts for Nigerian Business Owners",
   description:
-    "Free copy-and-paste ChatGPT prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice, edit short videos with Claude and get more customers.",
-  alternates: {
-    canonical: "https://yieldedcircletech.com/resources/ai-prompts",
+    "Free copy-and-paste AI prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice, edit short videos and get more customers.",
+  path: "/resources/ai-prompts",
+  image: {
+    url: "/og-ai-prompts.jpg",
+    alt: "Free AI Prompts for Nigerian Business Owners",
   },
-  openGraph: {
-    title: "Free AI Prompts for Nigerian Business Owners",
-    description:
-      "Copy, paste and grow your business with AI. Free prompts by Ayo, Founder of Yielded Circle Tech.",
-    url: "https://yieldedcircletech.com/resources/ai-prompts",
-    siteName: "Yielded Circle Tech",
-    type: "website",
-    images: [
-      {
-        url: "https://yieldedcircletech.com/og-ai-prompts.jpg",
-        width: 1200,
-        height: 630,
-        type: "image/jpeg",
-        alt: "Free AI Prompts for Nigerian Business Owners",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Free AI Prompts for Nigerian Business Owners",
-    description:
-      "Copy, paste and grow your business with AI. Free prompts by Ayo, Founder of Yielded Circle Tech.",
-    images: ["https://yieldedcircletech.com/og-ai-prompts.jpg"],
-  },
-};
+});
 
 const steps = [
   "1. Copy a prompt",
@@ -51,6 +31,9 @@ const steps = [
 export default function AiPromptsPage() {
   return (
     <main className="relative overflow-x-clip">
+      <Breadcrumbs
+        items={[{ name: "Free AI prompts", path: "/resources/ai-prompts" }]}
+      />
       <header className="relative overflow-hidden bg-[radial-gradient(900px_500px_at_85%_0%,rgba(118,48,255,0.45),transparent_70%),linear-gradient(160deg,#21004b_0%,#12002b_100%)] px-4 pb-16 pt-28 text-white md:px-6 md:pb-20 md:pt-32">
         <div className="mx-auto w-full max-w-3xl">
           <span className="inline-flex rounded-lg bg-white px-3 py-1.5 text-[13px] font-extrabold uppercase tracking-[0.08em] text-brand-dark">
