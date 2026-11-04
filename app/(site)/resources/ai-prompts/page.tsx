@@ -63,7 +63,7 @@ export default function AiPromptsPage() {
           </h1>
 
           <p className="mt-3.5 max-w-xl text-lg leading-relaxed text-[#ddd5ff] md:text-xl">
-            Copy. Paste. Grow. Simple ChatGPT prompts to help you market your
+            Copy. Paste. Grow. Simple prompts to help you market your
             business, create content faster and get more customers.
           </p>
 
@@ -99,7 +99,7 @@ export default function AiPromptsPage() {
               href={`#${videoGuide.id}`}
               className="rounded-full bg-white/95 px-4 py-2 text-sm font-bold text-brand-deep transition hover:bg-brand-light"
             >
-              {videoGuide.title}
+              Video Guide Edits
             </a>
           </nav>
         </div>
