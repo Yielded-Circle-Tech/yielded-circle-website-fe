@@ -19,8 +19,8 @@ const workItems: WorkItem[] = [
     title: "Haba Na Haba",
     description:
       "USSD-based app helping smallholder farmers in Uganda access credit and savings — built for low-bandwidth markets without smartphones.",
-    image: "/haba-na-haba-admin.png",
-    imageAlt: "Haba Na Haba admin dashboard preview",
+    image: "/haba-na-haba-admin.webp",
+    imageAlt: "Screenshot of the Haba Na Haba admin dashboard for the USSD food bank platform",
   },
   {
     slug: "leddar",
@@ -29,8 +29,8 @@ const workItems: WorkItem[] = [
     title: "Leddar Platform",
     description:
       "Three-tier B2B managed marketplace connecting fashion brands with leather artisans — with escrow payments, KYC, and WhatsApp notifications.",
-    image: "/leddar.png",
-    imageAlt: "Leddar platform dashboard preview",
+    image: "/leddar.webp",
+    imageAlt: "Screenshot of the Leddar B2B leather marketplace dashboard",
   },
   {
     slug: "bookpound",
@@ -39,8 +39,8 @@ const workItems: WorkItem[] = [
     title: "BookPound",
     description:
       "Multi-vendor used book marketplace on Magento — NGN payments, vendor privacy, AWS SES email, and custom commission management.",
-    image: "/bookpound.png",
-    imageAlt: "BookPound marketplace interface preview",
+    image: "/bookpound.webp",
+    imageAlt: "Screenshot of the BookPound multi-vendor used book marketplace",
   },
   {
     slug: "itan-technologies",
@@ -49,8 +49,8 @@ const workItems: WorkItem[] = [
     title: "Itan Technologies",
     description:
       "Product built under the Itan Technologies brand — demonstrating our ability to work as an embedded technical team for founders.",
-    image: "/itan-reader.png",
-    imageAlt: "Itan reader product preview",
+    image: "/itan-reader.webp",
+    imageAlt: "Screenshot of the ITAN ebook reading platform homepage",
   },
 ];
 
@@ -63,7 +63,7 @@ export function Work() {
   };
 
   return (
-    <section className="section-space border-t border-page-border" id="work">
+    <section className="section-space scroll-mt-16 border-t border-page-border" id="work">
       <div className="mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal mx-auto max-w-2xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
