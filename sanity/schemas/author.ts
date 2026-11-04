@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { slugify } from "../lib/slugify";
 
 export const author = defineType({
   name: "author",
@@ -15,7 +16,7 @@ export const author = defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: { source: "name", maxLength: 96 },
+      options: { source: "name", maxLength: 75, slugify: (input: string) => slugify(input) },
     }),
     defineField({
       name: "role",
@@ -33,6 +34,7 @@ export const author = defineType({
           name: "alt",
           title: "Alternative text",
           type: "string",
+          description: "Defaults to the author's name if left empty.",
         }),
       ],
     }),

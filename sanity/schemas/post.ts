@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { SLUG_PATTERN, slugify } from "../lib/slugify";
 
 export const post = defineType({
   name: "post",
@@ -22,8 +23,21 @@ export const post = defineType({
       title: "Slug",
       type: "slug",
       group: "content",
-      options: { source: "title", maxLength: 96 },
-      validation: (rule) => rule.required(),
+      description:
+        "The post URL: /blog/your-slug. Click Generate. Keep it short and keyword-focused, and do not change it after publishing (old links would 404).",
+      options: {
+        source: "title",
+        maxLength: 75,
+        slugify: (input: string) => slugify(input),
+      },
+      validation: (rule) =>
+        rule.required().custom((value) => {
+          const current = (value as { current?: string } | undefined)?.current;
+          if (!current) return true;
+          return SLUG_PATTERN.test(current)
+            ? true
+            : "Use lowercase letters, numbers and single hyphens only (e.g. how-to-validate-an-mvp).";
+        }),
     }),
     defineField({
       name: "excerpt",
@@ -32,14 +46,19 @@ export const post = defineType({
       rows: 3,
       group: "content",
       description:
-        "One or two sentences. Shown on cards and used as the meta description.",
-      validation: (rule) => rule.required().max(200),
+        "One or two sentences. Shown on cards and used as the meta description unless an SEO description is set. Aim for 120–160 characters.",
+      validation: (rule) => [
+        rule.required().max(200),
+        rule.max(160).warning("Google cuts descriptions at about 160 characters."),
+      ],
     }),
     defineField({
       name: "coverImage",
       title: "Cover image",
       type: "image",
       group: "content",
+      description:
+        "Used on cards, at the top of the post and as the social share image. Upload at least 1600×900 (16:9).",
       options: { hotspot: true },
       fields: [
         defineField({
@@ -100,7 +119,10 @@ export const post = defineType({
       title: "SEO title",
       type: "string",
       group: "seo",
-      description: "Overrides the post title in search results and link previews.",
+      description:
+        "Overrides the post title in search results and link previews. Aim for 50–60 characters; the brand name is added automatically.",
+      validation: (rule) =>
+        rule.max(60).warning("Titles over 60 characters get cut off in Google."),
     }),
     defineField({
       name: "seoDescription",
@@ -108,8 +130,13 @@ export const post = defineType({
       type: "text",
       rows: 2,
       group: "seo",
-      description: "Overrides the excerpt in search results and link previews.",
-      validation: (rule) => rule.max(200),
+      description:
+        "Overrides the excerpt in search results and link previews. Aim for 120–160 characters.",
+      validation: (rule) => [
+        rule.max(200),
+        rule.max(160).warning("Google cuts descriptions at about 160 characters."),
+        rule.min(70).warning("Short descriptions are often replaced by Google."),
+      ],
     }),
   ],
   orderings: [
