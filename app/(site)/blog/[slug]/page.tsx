@@ -2,57 +2,73 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { JsonLd } from "@/components/JsonLd";
 import { AuthorByline } from "@/components/blog/AuthorByline";
 import { BlogCta } from "@/components/blog/BlogCta";
 import { PortableTextBody } from "@/components/blog/PortableTextBody";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { imageUrl } from "@/sanity/lib/image";
+import { pageMetadata, truncate } from "@/lib/seo";
+import { blogPostingSchema } from "@/lib/structuredData";
 import {
   getPostBySlug,
   getPostSlugs,
   getRelatedPosts,
+  safeFetch,
 } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
-
-const SITE_URL = "https://yieldedcircletech.com";
 
 type Props = {
   params: { slug: string };
 };
 
 export async function generateStaticParams() {
-  const slugs = await getPostSlugs();
+  const slugs = await safeFetch("post slugs", getPostSlugs, []);
   return slugs.map(({ slug }) => ({ slug }));
 }
 
+/**
+ * Every post gets its SEO from here automatically: title (seoTitle or
+ * title), description (seoDescription or excerpt), canonical, Open Graph
+ * article tags, Twitter card, and the BlogPosting + BreadcrumbList schema
+ * rendered below. Editors only fill in fields in Sanity.
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
 
   if (!post) {
-    return { title: "Post not found | Yielded Circle Tech" };
+    return { title: "Post not found", robots: { index: false } };
   }
 
   const title = post.seoTitle || post.title;
-  const description = post.seoDescription || post.excerpt;
-  const url = `${SITE_URL}/blog/${post.slug}`;
-  const ogImage = post.coverImage
-    ? imageUrl(post.coverImage, 1200, 630)
-    : "/og-image.jpg";
+  const description = truncate(post.seoDescription || post.excerpt);
+  const path = `/blog/${post.slug}`;
+  const base = pageMetadata({
+    title,
+    description,
+    path,
+    type: "article",
+    image: post.coverImage
+      ? {
+          url: imageUrl(post.coverImage, 1200, 630),
+          alt: post.coverImage.alt || post.title,
+        }
+      : undefined,
+  });
 
   return {
-    title: `${title} | Yielded Circle Tech`,
-    description,
-    alternates: { canonical: url },
+    ...base,
+    authors: post.author?.name ? [{ name: post.author.name }] : undefined,
     openGraph: {
-      title,
-      description,
-      url,
-      siteName: "Yielded Circle Tech",
+      ...base.openGraph,
       type: "article",
       publishedTime: post.publishedAt,
+      modifiedTime: post._updatedAt,
       authors: post.author?.name ? [post.author.name] : undefined,
-      images: [{ url: ogImage, width: 1200, height: 630 }],
+      section: post.categories?.[0]?.title,
+      tags: post.categories?.map((item) => item.title),
     },
   };
 }
@@ -66,42 +82,39 @@ export default async function BlogPostPage({ params }: Props) {
 
   const categorySlugs = post.categories?.map((item) => item.slug) ?? [];
   const related = await getRelatedPosts(post._id, categorySlugs);
+  const path = `/blog/${post.slug}`;
 
-  const jsonLd = {
+  const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.publishedAt,
-    url: `${SITE_URL}/blog/${post.slug}`,
-    ...(post.coverImage
-      ? { image: imageUrl(post.coverImage, 1200, 630) }
-      : {}),
-    ...(post.author?.name
-      ? { author: { "@type": "Person", name: post.author.name } }
-      : {}),
-    publisher: {
-      "@type": "Organization",
-      name: "Yielded Circle Tech",
-      url: SITE_URL,
-    },
+    ...blogPostingSchema({
+      title: post.title,
+      description: post.seoDescription || post.excerpt,
+      path,
+      publishedAt: post.publishedAt,
+      updatedAt: post._updatedAt,
+      image: post.coverImage
+        ? imageUrl(post.coverImage, 1200, 630)
+        : undefined,
+      authorName: post.author?.name,
+      categories: post.categories?.map((item) => item.title),
+      wordCount: post.wordCount,
+    }),
   };
 
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={articleSchema} />
 
       <article className="section-space mx-auto w-full max-w-content px-4 md:px-6">
-        <div className="reveal mx-auto max-w-3xl">
-          <Link
-            href="/blog"
-            className="text-xs font-semibold uppercase tracking-[0.18em] text-brand transition hover:text-brand-deep"
-          >
-            &larr; All posts
-          </Link>
+        {/* No fade-in on the header or cover: they are the LCP candidates. */}
+        <div className="mx-auto max-w-3xl">
+          <Breadcrumbs
+            visible
+            items={[
+              { name: "Blog", path: "/blog" },
+              { name: post.title, path },
+            ]}
+          />
 
           {post.categories?.length ? (
             <div className="mt-5 flex flex-wrap gap-2">
@@ -133,7 +146,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {post.coverImage ? (
-          <div className="reveal mx-auto mt-10 max-w-4xl">
+          <div className="mx-auto mt-10 max-w-4xl">
             <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-brand-soft/60 shadow-[0_20px_44px_rgba(75,0,130,0.16)]">
               <Image
                 src={imageUrl(post.coverImage, 1600, 900)}

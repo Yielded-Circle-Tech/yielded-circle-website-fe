@@ -17,9 +17,9 @@ export function PromptCard({ prompt, index }: Props) {
         {prompt.number}
       </div>
 
-      <h2 className="mt-3 text-balance text-2xl font-semibold tracking-tight text-page-text md:text-[26px]">
+      <h3 className="mt-3 text-balance text-2xl font-semibold tracking-tight text-page-text md:text-[26px]">
         {prompt.title}
-      </h2>
+      </h3>
 
       <p className="mt-2 text-base leading-relaxed text-page-textMuted">
         {prompt.what}

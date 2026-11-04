@@ -1,7 +1,9 @@
+import { cache } from "react";
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import type {
   CategoryRef,
+  FeedPost,
   PostCardData,
   PostDetail,
   PostSlug,
@@ -76,19 +78,24 @@ export async function getFeaturedPost(): Promise<PostCardData | null> {
   );
 }
 
-export async function getPostBySlug(slug: string): Promise<PostDetail | null> {
+/** Cached per request so generateMetadata and the page share one fetch. */
+export const getPostBySlug = cache(async function getPostBySlug(
+  slug: string,
+): Promise<PostDetail | null> {
   return client.fetch<PostDetail | null>(
     groq`*[${PUBLISHED} && slug.current == $slug][0]{
       ${CARD_FIELDS},
+      _updatedAt,
       body,
       seoTitle,
       seoDescription,
+      "wordCount": length(string::split(pt::text(body), " ")),
       author->{name, role, photo, bio}
     }`,
     { slug },
     fetchOptions,
   );
-}
+});
 
 /**
  * Up to three posts sharing a category. When fewer match, the remainder is
@@ -138,6 +145,42 @@ export async function getPostSlugs(): Promise<PostSlug[]> {
   return client.fetch<PostSlug[]>(
     groq`*[${PUBLISHED}]| order(publishedAt desc){"slug": slug.current, _updatedAt}`,
     {},
+    fetchOptions,
+  );
+}
+
+/**
+ * For build-time lists (static params, sitemap, RSS). A CMS outage should
+ * leave these lists short for one revalidation window, not fail the deploy.
+ */
+export async function safeFetch<T>(
+  label: string,
+  fn: () => Promise<T>,
+  fallback: T,
+): Promise<T> {
+  try {
+    return await fn();
+  } catch (error) {
+    console.warn(`[sanity] ${label} failed, using fallback:`, error instanceof Error ? error.message : error);
+    return fallback;
+  }
+}
+
+/** Newest posts with enough detail for the RSS feed. */
+export async function getFeedPosts(limit = 50): Promise<FeedPost[]> {
+  return client.fetch<FeedPost[]>(
+    groq`*[${PUBLISHED}] | order(publishedAt desc)[0...$limit]{
+      title,
+      "slug": slug.current,
+      excerpt,
+      seoDescription,
+      publishedAt,
+      _updatedAt,
+      coverImage,
+      "authorName": author->name,
+      "categories": categories[]->title
+    }`,
+    { limit },
     fetchOptions,
   );
 }

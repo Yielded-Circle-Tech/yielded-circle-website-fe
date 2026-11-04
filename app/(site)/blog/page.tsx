@@ -5,26 +5,63 @@ import { CategoryFilter } from "@/components/blog/CategoryFilter";
 import { FeaturedPost } from "@/components/blog/FeaturedPost";
 import { Pagination } from "@/components/blog/Pagination";
 import { PostCard } from "@/components/blog/PostCard";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { pageMetadata } from "@/lib/seo";
 import { POSTS_PER_PAGE } from "@/sanity/env";
 import {
   getCategories,
   getFeaturedPost,
   getPosts,
   getPostsCount,
+  safeFetch,
 } from "@/sanity/lib/queries";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Blog | Yielded Circle Tech",
-  description:
-    "Practical product and engineering writing on MVP strategy, architecture decisions, and scaling software in African markets.",
-  alternates: { canonical: "https://yieldedcircletech.com/blog" },
-};
+const BLOG_DESCRIPTION =
+  "Practical writing on MVP strategy, architecture decisions and scaling software in African markets, from the Yielded Circle Tech team in Lagos.";
 
 type Props = {
   searchParams: { category?: string; page?: string };
 };
+
+/**
+ * Category and pagination views each get their own canonical so deeper
+ * pages stay crawlable instead of all claiming to be /blog.
+ */
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const category = searchParams.category?.trim() || undefined;
+  const page = Number.parseInt(searchParams.page ?? "1", 10);
+  const pageNumber = Number.isFinite(page) && page > 1 ? page : 1;
+
+  const params = new URLSearchParams();
+  if (category) params.set("category", category);
+  if (pageNumber > 1) params.set("page", String(pageNumber));
+  const query = params.toString();
+
+  const categoryTitle = category
+    ? (await safeFetch("categories", getCategories, [])).find(
+        (item) => item.slug === category,
+      )?.title
+    : undefined;
+
+  const titleParts = [
+    categoryTitle ? `${categoryTitle} Articles` : "Blog: Building MVPs and Software in Africa",
+    pageNumber > 1 ? `Page ${pageNumber}` : "",
+  ].filter(Boolean);
+
+  return pageMetadata({
+    title: titleParts.join(" · "),
+    description: categoryTitle
+      ? `Articles on ${categoryTitle.toLowerCase()} from Yielded Circle Tech: practical lessons from building software for African founders and NGOs.`
+      : BLOG_DESCRIPTION,
+    path: query ? `/blog?${query}` : "/blog",
+    // An unknown category renders an empty state; keep it out of the index.
+    noIndex: Boolean(category && !categoryTitle),
+  });
+}
 
 export default async function BlogPage({ searchParams }: Props) {
   const category = searchParams.category?.trim() || undefined;
@@ -56,6 +93,7 @@ export default async function BlogPage({ searchParams }: Props) {
 
   return (
     <main className="relative overflow-x-clip pb-16 pt-24 md:pb-24">
+      <Breadcrumbs items={[{ name: "Blog", path: "/blog" }]} />
       <section className="section-space mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal mx-auto max-w-3xl text-center">
           <div className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
