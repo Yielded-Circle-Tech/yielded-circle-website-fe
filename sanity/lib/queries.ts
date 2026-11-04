@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { groq } from "next-sanity";
+import groq from "groq";
 import { client } from "@/sanity/lib/client";
 import type {
   CategoryRef,
