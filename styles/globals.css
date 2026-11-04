@@ -31,11 +31,16 @@
     @apply py-16 md:py-24;
   }
 
+  /*
+   * Entrance animation. Keep it off above-the-fold headings and hero images:
+   * an element that starts at opacity 0 delays Largest Contentful Paint.
+   * No `will-change` here: on dozens of elements it pins a compositor layer
+   * each, which costs memory on low-end phones.
+   */
   .reveal {
     @apply animate-fadeInUp;
     animation-delay: var(--reveal-delay, 0ms);
     animation-fill-mode: both;
-    will-change: transform, opacity;
   }
 
   .reveal-slow {
@@ -43,7 +48,6 @@
     animation-delay: var(--reveal-delay, 0ms);
     animation-duration: 950ms;
     animation-fill-mode: both;
-    will-change: transform, opacity;
   }
 
   @media (prefers-reduced-motion: reduce) {

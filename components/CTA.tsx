@@ -65,7 +65,7 @@ export function CTA() {
   };
 
   return (
-    <section className="section-space border-t border-page-border" id="contact">
+    <section className="section-space scroll-mt-16 border-t border-page-border" id="contact">
       <div className="mx-auto w-full max-w-content px-4 md:px-6">
         <div className="reveal rounded-3xl border border-brand-soft/60 bg-[linear-gradient(140deg,#f3e7ff_0%,#e9dbff_48%,#ddd0ff_100%)] px-5 py-10 text-center shadow-[0_20px_44px_rgba(75,0,130,0.16)] md:px-8 md:py-12">
           <h2 className="text-3xl font-medium tracking-tight text-page-text md:text-4xl">
