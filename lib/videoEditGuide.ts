@@ -33,7 +33,7 @@ export const studyPrompt: PromptSegment[] = [
   { fill: "[another word]" },
   '", show ',
   { fill: "[what you want to see]" },
-  ".\nIf this part is empty, choose the moments yourself.\n\n5. Don't render anything yet. Give me a storyboard table: one row per moment, with the time, my words, what's on screen and the edit move. Add a still preview image for 3 key moments. Give me 2 or 3 style options, and wait for my choice.",
+  ".\nIf this part is empty, choose the moments yourself.\n\n5. Don't render anything yet. Make the storyboard as one page I can open in my browser. Save it as videos/storyboard/storyboard.html, with the preview pictures showing on the page, and tell me where it is. Put these on the page:\n- how much time each layout gets, and how much of the video shows my face\n- a still preview image for 3 key moments\n- a storyboard table: one row per moment, with the time, my words, the layout and why, what's on screen and the edit move\n- your 2 or 3 style options, side by side\n- anything you decided for me that I should check\nKeep the page simple and easy to read. Then wait for my choice.",
 ];
 
 export const firstEditPrompt: PromptSegment[] = [

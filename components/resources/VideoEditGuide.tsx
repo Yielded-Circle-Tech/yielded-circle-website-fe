@@ -35,6 +35,20 @@ function Callout({ children }: { children: ReactNode }) {
   );
 }
 
+function Warning({ children }: { children: ReactNode }) {
+  return (
+    <div
+      role="note"
+      className="mt-5 flex gap-3 rounded-xl border border-amber-300 border-l-4 border-l-amber-500 bg-amber-50 px-4 py-3.5 text-[14.5px] leading-relaxed text-amber-950"
+    >
+      <span aria-hidden="true" className="mt-px shrink-0 text-base leading-snug">
+        ⚠️
+      </span>
+      <p>{children}</p>
+    </div>
+  );
+}
+
 function CheckList({ items }: { items: ReactNode[] }) {
   return (
     <ul className="space-y-2.5 text-base leading-relaxed text-page-textMuted">
@@ -139,13 +153,13 @@ const steps: Step[] = [
         <div className="mt-5">
           <PromptBlock id="video-study" body={studyPrompt} />
         </div>
-        <Callout>
+        <Warning>
           Claude will stop once to tell you which B-roll would help. Get the
           ones you can, put them in{" "}
           <b className="font-semibold">videos/raw/broll</b>, then type
           &ldquo;Done, carry on.&rdquo; Or type &ldquo;Make graphics
           instead.&rdquo;
-        </Callout>
+        </Warning>
         <Tip label="Read the plan before you pick.">
           Is your face still visible enough? Too busy? Something missing? Say so
           now. Changing a plan is cheap. Changing a finished video is not.
