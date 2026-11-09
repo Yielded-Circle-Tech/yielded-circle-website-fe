@@ -139,6 +139,13 @@ const steps: Step[] = [
         <div className="mt-5">
           <PromptBlock id="video-study" body={studyPrompt} />
         </div>
+        <Callout>
+          Claude will stop once to tell you which B-roll would help. Get the
+          ones you can, put them in{" "}
+          <b className="font-semibold">videos/raw/broll</b>, then type
+          &ldquo;Done, carry on.&rdquo; Or type &ldquo;Make graphics
+          instead.&rdquo;
+        </Callout>
         <Tip label="Read the plan before you pick.">
           Is your face still visible enough? Too busy? Something missing? Say so
           now. Changing a plan is cheap. Changing a finished video is not.

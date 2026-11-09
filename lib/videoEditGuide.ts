@@ -21,11 +21,11 @@ export const setupPrompt: PromptSegment[] = [
 export const studyPrompt: PromptSegment[] = [
   "Here's a reel whose editing I like: videos/reference/style-ref.mp4. It's for study only. Never use its footage in my videos.\n\nI speak ",
   { fill: "[English]" },
-  ". Always transcribe my videos in that language.\n\n1. Study it. Transcribe it with Whisper, use FFmpeg to measure how often it cuts, and look at only 5 to 8 frames. Then tell me its editing style in a short, simple list: how fast it cuts, how the screen is laid out, caption size and position, words per caption, when graphics appear, and how the first 3 seconds open.\n\n2. Plan that style for my video: videos/raw/my-clip.mp4.\n\nMy colours: ",
+  ". Always transcribe my videos in that language.\n\n1. Study it. Transcribe it with Whisper, use FFmpeg to measure how often it cuts, and look at only 5 to 8 frames. Then tell me its editing style in a short, simple list: how fast it cuts, how the screen is laid out, caption size and position, words per caption, when graphics appear, and how the first 3 seconds open.\n\n2. Check my B-roll. Transcribe my video, videos/raw/my-clip.mp4, and look at what's in videos/raw/broll. Then give me a short list of up to 5 B-roll shots that would make my video better: the time, my words, and what to film or screen-record. Only suggest things I can get in a few minutes with my phone or laptop. Mark each one \"I have it\" or \"I need it\". Then stop and wait. I'll add the clips to videos/raw/broll, or tell you to make graphics instead.\n\n3. Plan that style for my video.\n\nMy colours: ",
   { fill: "[for example: purple and yellow]" },
   "\nMy font: ",
   { fill: '[for example: Montserrat, or "pick a clean, bold one"]' },
-  "\nUse one accent colour per screen, on one word or one thing only.\n\n3. My extra clips and screen recordings are in videos/raw/broll. Use them where they fit, before you make up any graphics. Mute their sound. For screen recordings, zoom in on the part that matters, so the text is easy to read on a phone. If the folder is empty, make the graphics yourself.\n\n4. Optional: things I want on screen at certain moments.\n- When I say \"",
+  "\nUse one accent colour per screen, on one word or one thing only.\nUse my clips in videos/raw/broll where they fit, before you make up any graphics. Mute their sound. For screen recordings, zoom in on the part that matters, so the text is easy to read on a phone.\n\n4. Optional: things I want on screen at certain moments.\n- When I say \"",
   { fill: "[a word from your video]" },
   '", show ',
   { fill: "[what you want to see]" },
