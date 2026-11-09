@@ -359,22 +359,20 @@ export function VideoEditGuide() {
         <SubHeading eyebrow="Every new video" title="Your routine" />
         <ol className="list-decimal space-y-2.5 pl-5 text-base leading-relaxed text-page-textMuted marker:font-bold marker:text-brand">
           <li>
-            <b className="text-page-text">Before filming,</b> write your 3 to 5
-            &ldquo;when I say X, show Y&rdquo; lines.
-          </li>
-          <li>
             <b className="text-page-text">Film.</b> Sit back, 45 to 60 seconds.
             If you show steps on your phone or laptop, screen-record them while
             you&apos;re at it. Real screen recordings look far better than
-            made-up graphics.
+            made-up graphics. Close anything private before you screen-record.
           </li>
           <li>
             <b className="text-page-text">Put the files in place.</b> Clip in
-            videos/raw. Screen recordings in videos/raw/broll.
+            videos/raw. Extra clips and screen recordings in videos/raw/broll.
           </li>
           <li>
             <b className="text-page-text">Start a new chat in Claude Code</b>{" "}
-            for each video. Old, long chats use up your limit faster.
+            for each video, in your claude-video-editor folder. Your skill is
+            saved in that folder, so Claude still remembers your style. Long
+            chats use up your limit faster.
           </li>
           <li>
             <b className="text-page-text">Paste this:</b>
@@ -384,7 +382,7 @@ export function VideoEditGuide() {
           <PromptBlock id="video-routine" body={routinePrompt} />
         </div>
         <ol
-          start={6}
+          start={5}
           className="mt-6 list-decimal space-y-2.5 pl-5 text-base leading-relaxed text-page-textMuted marker:font-bold marker:text-brand"
         >
           <li>

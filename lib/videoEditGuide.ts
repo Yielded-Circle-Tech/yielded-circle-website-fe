@@ -75,7 +75,7 @@ export const routinePrompt: PromptSegment[] = [
   { fill: "[another word]" },
   '", show ',
   { fill: "[what you want to see]" },
-  ".\n\nIf I left b) or c) empty, follow my skill and choose the moments yourself.\n\nd) Use my clips and screen recordings in videos/raw/broll where they fit. Be creative everywhere else.\n\ne) Show me a short storyboard first, with no preview images, and wait for my OK. Then follow my skill's rules and save to videos/final.",
+  ".\n\nIf I left b) or c) empty, follow my skill and choose the moments yourself.\n\nd) Use my clips and screen recordings in videos/raw/broll where they fit. Be creative everywhere else.\n\ne) In one message, show me any words you're not sure about and a short storyboard in the chat, with no preview images. If a moment needs a clip I don't have, say so. Wait for my OK. Then follow my skill's rules and save to videos/final.",
 ];
 
 export const learnPrompt: PromptSegment[] = [
