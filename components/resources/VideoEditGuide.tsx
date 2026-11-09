@@ -101,8 +101,8 @@ const steps: Step[] = [
             </>,
             <>
               Put it in <b className="text-page-text">videos/reference</b> and
-              rename it <b className="text-page-text">style-ref</b> or use any
-              name of choice.
+              rename it <b className="text-page-text">style-ref</b> or any name
+              of your choice.
             </>,
             <>
               Film your own short (45 to 60 seconds is best). Put it in{" "}
