@@ -15,15 +15,17 @@ export const videoGuide = {
 };
 
 export const setupPrompt: PromptSegment[] = [
-  "Set me up to edit short videos with you on this computer. First, check my operating system, memory (RAM) and free disk space and tell me in simple words. Then install only these: FFmpeg, a lightweight Whisper (faster-whisper or whisper.cpp) with the small model, and the Hyperframes skills (npx skills add heygen-com/hyperframes). Install one at a time and test each one before moving on. If any install shows no progress for 10 minutes, stop it and tell me. Then make these folders: videos/raw for my clips, videos/reference for videos I study, and videos/final for finished videos. At the end, give me a simple list: what's working, what failed, and why.",
+  "Set me up to edit short videos with you on this computer. First, check my operating system, memory (RAM) and free disk space and tell me in simple words. Then install only these: FFmpeg, a lightweight Whisper (faster-whisper or whisper.cpp) with the small model, and the Hyperframes skills (npx skills add heygen-com/hyperframes). If any of these needs something else first, like Python or Node.js, tell me what it is and install it. If an install needs admin rights, find another way or tell me. Install one at a time and test each one before moving on. If any install shows no progress for 10 minutes, stop it and tell me. Don't run any usage tracking or reporting commands. Then set up whatever Hyperframes needs to render videos, and test it by rendering a 3-second vertical test video. Then make these folders: videos/raw for my clips, videos/raw/broll for my extra clips and screen recordings, videos/reference for videos I study, and videos/final for finished videos. At the end, give me a simple list: what's working, what failed, and why.",
 ];
 
 export const studyPrompt: PromptSegment[] = [
-  "Here's a reel whose editing I like: videos/reference/style-ref.mp4. It's for study only. Never use its footage in my videos.\n\n1. Study it. Transcribe it with Whisper, use FFmpeg to measure how often it cuts, and look at only 5 to 8 frames. Then tell me its editing style in a short, simple list: how fast it cuts, how the screen is laid out, caption size and position, words per caption, when graphics appear, and how the first 3 seconds open.\n\n2. Plan that style for my video: videos/raw/my-clip.mp4.\n\nMy colours: ",
+  "Here's a reel whose editing I like: videos/reference/style-ref.mp4. It's for study only. Never use its footage in my videos.\n\nI speak ",
+  { fill: "[English]" },
+  ". Always transcribe my videos in that language.\n\n1. Study it. Transcribe it with Whisper, use FFmpeg to measure how often it cuts, and look at only 5 to 8 frames. Then tell me its editing style in a short, simple list: how fast it cuts, how the screen is laid out, caption size and position, words per caption, when graphics appear, and how the first 3 seconds open.\n\n2. Plan that style for my video: videos/raw/my-clip.mp4.\n\nMy colours: ",
   { fill: "[for example: purple and yellow]" },
   "\nMy font: ",
   { fill: '[for example: Montserrat, or "pick a clean, bold one"]' },
-  "\nUse one accent colour per screen, on one word or one thing only.\n\n3. Optional: things I want on screen at certain moments.\n- When I say \"",
+  "\nUse one accent colour per screen, on one word or one thing only.\n\n3. My extra clips and screen recordings are in videos/raw/broll. Use them where they fit, before you make up any graphics. Mute their sound. For screen recordings, zoom in on the part that matters, so the text is easy to read on a phone. If the folder is empty, make the graphics yourself.\n\n4. Optional: things I want on screen at certain moments.\n- When I say \"",
   { fill: "[a word from your video]" },
   '", show ',
   { fill: "[what you want to see]" },
@@ -31,17 +33,15 @@ export const studyPrompt: PromptSegment[] = [
   { fill: "[another word]" },
   '", show ',
   { fill: "[what you want to see]" },
-  ".\nIf this part is empty, choose the moments yourself.\n\n4. Don't render anything yet. Give me a storyboard table: one row per moment, with the time, my words, what's on screen and the edit move. Add a still preview image for 3 key moments. Give me 2 or 3 style options, and wait for my choice.",
+  ".\nIf this part is empty, choose the moments yourself.\n\n5. Don't render anything yet. Give me a storyboard table: one row per moment, with the time, my words, what's on screen and the edit move. Add a still preview image for 3 key moments. Give me 2 or 3 style options, and wait for my choice.",
 ];
 
 export const firstEditPrompt: PromptSegment[] = [
   "I pick option ",
   { fill: "[A, B or C]" },
-  ". Now edit videos/raw/my-clip.mp4 in that style. Follow these rules:\n\n1. Make it vertical, 1080x1920.\n2. Transcribe it with Whisper in ",
+  ". Now edit videos/raw/my-clip.mp4 in that style, following the storyboard we agreed. Follow these rules:\n\n1. Make it vertical, 1080x1920.\n2. Transcribe it with Whisper in ",
   { fill: "[your language, for example English]" },
-  ", with a time for every word. Show me the transcript, flag any words you're not sure about, and wait for my corrections. Use my corrected words in the captions.\n3. Never cut the small words and sounds that are part of how I talk, like ",
-  { fill: '["o", "abi", "sha" or your own]' },
-  ". Whisper may not write them down, so listen to the audio before you cut any sound as a pause.\n4. Faint background noise between words counts as silence.\n5. Cut every pause longer than 0.2 seconds and every mistake or repeated line, but never cut inside a word.\n6. End the video 0.2 seconds after my last word.\n7. Do the cuts first, then any speed change, then the captions and graphics.\n8. Render with fast settings (multi-threaded, preset veryfast).\n9. Before you show me, check 3 frames of your render and fix anything that looks wrong.\n10. Save it to videos/final. At the end, write a short progress.md: what's done, what's left, and which files you made.",
+  ", with a time for every word, unless you already did. Show me the transcript, flag any words you're not sure about, and wait for my corrections, unless I already gave them. Use my corrected words in the captions.\n3. Never cut short words or sounds that are part of how I speak. Whisper may not write them down, so listen to the audio before you cut any sound as a pause.\n4. Faint background noise between words counts as silence.\n5. Cut every pause longer than 0.2 seconds and every mistake or repeated line, but never cut inside a word. If you're not sure a repeat is a mistake, ask me.\n6. Start on my first word, and end the video 0.2 seconds after my last word.\n7. Do the cuts first, then any speed change, then the captions and graphics.\n8. Render with fast settings (multi-threaded, preset veryfast).\n9. Before you show me, check 3 frames of your render and fix anything that looks wrong.\n10. Save it to videos/final. At the end, write a short progress.md: what's done, what's left, and which files you made.",
 ];
 
 export const fixPrompt: PromptSegment[] = [
@@ -59,7 +59,7 @@ export const fixPrompt: PromptSegment[] = [
 ];
 
 export const saveSkillPrompt: PromptSegment[] = [
-  "Save everything we agreed as a skill called my-shorts-edit: the style, the colours, the 10 rules and all my fixes. Read it every time you edit a video for me.",
+  "Save everything we agreed as a skill called my-shorts-edit: the style, the colours and font, my language, how to use my clips in videos/raw/broll, the 10 rules, and the fixes that apply to every video (not fixes for one moment in this video). Never run usage tracking. Then show me the skill file so I can see it's saved. Last, move my clips from videos/raw/broll into videos/raw/broll/used.",
 ];
 
 export const routinePrompt: PromptSegment[] = [
@@ -75,11 +75,11 @@ export const routinePrompt: PromptSegment[] = [
   { fill: "[another word]" },
   '", show ',
   { fill: "[what you want to see]" },
-  ".\n\nIf I left b) or c) empty, follow my skill and choose the moments yourself.\n\nd) Use my screen recordings in videos/raw/broll where they fit, each with a small label. Be creative everywhere else.\n\ne) Show me a short storyboard first, with no preview images, and wait for my OK. Then follow my skill's rules and save to videos/final.",
+  ".\n\nIf I left b) or c) empty, follow my skill and choose the moments yourself.\n\nd) Use my clips and screen recordings in videos/raw/broll where they fit. Be creative everywhere else.\n\ne) Show me a short storyboard first, with no preview images, and wait for my OK. Then follow my skill's rules and save to videos/final.",
 ];
 
 export const learnPrompt: PromptSegment[] = [
-  "Save what you learned from my notes to my skill, and update progress.md.",
+  "Save what you learned from my notes to my skill, only what applies to every video. Move my clips from videos/raw/broll into videos/raw/broll/used. Update progress.md.",
 ];
 
 export const troubleshooting: { see: string; why: string; fix: string }[] = [

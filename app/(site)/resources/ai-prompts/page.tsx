@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 const steps = [
   "1. Copy a prompt",
   "2. Fill in the [brackets]",
-  "3. Paste into ChatGPT",
+  "3. Paste into ChatGPT or Claude",
 ];
 
 export default function AiPromptsPage() {

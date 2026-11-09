@@ -108,6 +108,11 @@ const steps: Step[] = [
               <b className="text-page-text">videos/raw</b> and rename it{" "}
               <b className="text-page-text">my-clip.mp4</b>.
             </>,
+            <>
+              <b className="text-page-text">Got extra clips?</b> Your product,
+              your shop, your screen. Film or screen-record them and put them in{" "}
+              <b className="text-page-text">videos/raw/broll</b>.
+            </>,
           ]}
         />
         <Tip label="File names:">
@@ -288,7 +293,7 @@ export function VideoEditGuide() {
         <CheckList
           items={[
             "A paid Claude plan.",
-            "The Claude desktop app on a laptop. 8 GB of memory works. Less than that will struggle.",
+            "The Claude desktop app on a laptop. 8 GB of RAM works. Less than that will struggle.",
             "Short videos you film yourself, standing or sitting, talking to the camera.",
           ]}
         />
