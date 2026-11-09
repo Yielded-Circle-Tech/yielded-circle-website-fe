@@ -68,7 +68,7 @@ const steps: Step[] = [
           </li>
           <li>
             Make a new folder on your laptop called{" "}
-            <b className="text-page-text">my-video-editor</b> and attach it.
+            <b className="text-page-text">claude-video-editor</b> and attach it.
             Always open this same folder. Your tools and your editing style live
             inside it.
           </li>
