@@ -4,15 +4,17 @@ import { PackNote } from "@/components/resources/PackNote";
 import { PromptCard } from "@/components/resources/PromptCard";
 import { PromptSignupForm } from "@/components/resources/PromptSignupForm";
 import { VideoEditGuide } from "@/components/resources/VideoEditGuide";
+import { VideoEffectsGuide } from "@/components/resources/VideoEffectsGuide";
 import { promptPacks } from "@/lib/aiPrompts";
 import { videoGuide } from "@/lib/videoEditGuide";
+import { effectsGuide } from "@/lib/videoEffectsGuide";
 
 const COMMUNITY_LINK = "https://chat.whatsapp.com/DRFl1tSTMnx2qzJXyibKxu";
 
 export const metadata: Metadata = {
   title: "Free AI Prompts for Nigerian Business Owners | Yielded Circle Tech",
   description:
-    "Free copy-and-paste ChatGPT prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice, edit short videos with Claude and get more customers.",
+    "Free copy-and-paste ChatGPT prompts for Nigerian business owners. Turn trends into marketing ideas, write in your own voice, edit short videos and add effects with Claude, and get more customers.",
   alternates: {
     canonical: "https://yieldedcircletech.com/resources/ai-prompts",
   },
@@ -101,6 +103,12 @@ export default function AiPromptsPage() {
             >
               Video Guide Edits
             </a>
+            <a
+              href={`#${effectsGuide.id}`}
+              className="rounded-full bg-white/95 px-4 py-2 text-sm font-bold text-brand-deep transition hover:bg-brand-light"
+            >
+              Video Effects
+            </a>
           </nav>
         </div>
       </header>
@@ -135,6 +143,8 @@ export default function AiPromptsPage() {
         ))}
 
         <VideoEditGuide />
+
+        <VideoEffectsGuide />
 
         <section
           id="join"
